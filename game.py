@@ -8,7 +8,15 @@ st.set_page_config(page_title="🎮 World's Fastest Game Generator", layout="cen
 st.sidebar.image("https://github.com/pratik-gond/temp_files/blob/main/image-removebg-preview.png?raw=true", use_container_width=True)
 st.sidebar.header("⚙️ Configuration")
 api_key = st.sidebar.text_input("Enter your Cerebras API Key", type="password")
-model_name = st.sidebar.selectbox("Model", ["qwen-3-235b-a22b-instruct-2507"], index=0)
+model_name = st.sidebar.selectbox(
+    "Model", 
+    [
+        "qwen-3-coder-480b",
+        "qwen-3-235b-a22b-instruct-2507",
+        "qwen-3-235b-a22b-thinking-2507"
+    ], 
+    index=0
+)
 
 st.sidebar.divider()
     
@@ -20,6 +28,9 @@ st.sidebar.markdown(
         "**❤️ Built by** [Build Fast with AI](https://buildfastwithai.com/genai-course)",
         unsafe_allow_html=True
     )   
+st.sidebar.markdown("**Want to learn how to build this?**")
+st.sidebar.markdown("Sign up for [Generative AI course](https://buildfastwithai.com/genai-course) by Build Fast with AI")   
+
 
 @st.cache_resource(show_spinner=False)
 def get_llm(api_key, model_name):
@@ -35,6 +46,7 @@ if "game_code" not in st.session_state:
     st.session_state.game_code = ""
 
 st.title("🎮 World's Fastest Game Generator")
+st.text("⚡️ Powered by Cerebras + Qwen-3 Series ")
 
 if api_key:
     # ========== Chat UI ==========
